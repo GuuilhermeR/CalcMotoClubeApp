@@ -21,7 +21,6 @@ namespace CalculadoraMotoClube
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
 
-
             materialSkinManager.ColorScheme = new ColorScheme(
                 Primary.Cyan400, Primary.Cyan500,
                 Primary.Cyan600, Accent.Cyan100,
@@ -83,19 +82,33 @@ namespace CalculadoraMotoClube
             txtBau.Text = Convert.ToString((VAL_TOTAL / 100) * PCT_VAL_BAU);
             txtCliente.Text = Convert.ToString((VAL_TOTAL / 100) * PCT_VAL_CLI);
             txtMecanico.Text = Convert.ToString((VAL_TOTAL / 100) * PCT_VAL_MEC);
+            string Texto = string.Empty;
 
-            string Texto = $@"Nº:
-Passaporte: {txtPassaporte.Text}
-Valor Baú: {txtBau.Text}
-Valor Cliente: {txtCliente.Text}
-Valor Mecânico: {txtMecanico.Text}
-Valor Total: {VAL_TOTAL}";
+            if (chkBooster.Checked)
+            {
+                Texto = $@"**Nº:**
+**Passaporte:** {txtPassaporte.Text}
+**Valor Baú:** {txtBau.Text}
+**Valor Cliente:** {txtCliente.Text}
+***Valor Mecânico:*** {txtMecanico.Text}
+**Valor Total:** {VAL_TOTAL}";
+            }
+            else
+            {
+                Texto = $@"**Nº:**
+**Passaporte:** {txtPassaporte.Text}
+**Valor Baú:** {txtBau.Text}
+**Valor Cliente:** {txtCliente.Text}
+**Valor Mecânico:** {txtMecanico.Text}
+**Valor Total:** {VAL_TOTAL}";
+            }
+            
 
             DataObject dataObj = new DataObject();
             dataObj.SetData(DataFormats.StringFormat, Texto);
             if (Clipboard.ContainsImage())
             {
-                dataObj.SetData(DataFormats.StringFormat, Clipboard.GetImage());
+                //dataObj.SetData(DataFormats.StringFormat, Clipboard.GetImage());
             }
             Clipboard.SetDataObject(dataObj);
         }
